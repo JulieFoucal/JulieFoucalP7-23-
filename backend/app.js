@@ -1,12 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+//const cors = require('cors');
 const app = express();
 const path = require("path");
-const helmet = require("helmet");
-app.use(helmet());
+//const helmet = require("helmet");
+//app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+const connection = require("./models/database");
+// simple query
+connection.query(
+    'SELECT * FROM `users`',
+    function(err, results, fields) {
+      console.log(results); // results contains rows returned by server
+      console.log(fields); // fields contains extra meta data about results, if available
+    }
+  );
 
 //const commentRoutes = require("./routes/comment")
 //const postRoutes = require('./routes/post')
